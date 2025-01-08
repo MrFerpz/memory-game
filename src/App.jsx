@@ -7,13 +7,11 @@ function App() {
   let score = 0;
   let clickedPokemon = [];
 
-  function handleClick() {
-    if (clickedPokemon.includes(pokemonName)) {
-      alert("You lose!")
-    } else {
-    clickedPokemon.push(pokemonName);
-    score++;
-    }
+  // registers the click now but the rest of the logic is flawed
+  function handleClick(e) {
+    const pokemon = e.target.id;
+    console.log(pokemon);
+    clickedPokemon.push(pokemon);
   }
 
   return (
@@ -22,15 +20,15 @@ function App() {
       <div class="gap"></div>
       <div class="main-grid">
         <Card className='card' pokemonName="ditto" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="groudon"></Card>
-        <Card className='card' pokemonName="suicune"></Card>
-        <Card className='card' pokemonName="bulbasaur"></Card>
-        <Card className='card' pokemonName="charmander"></Card>
-        <Card className='card' pokemonName="squirtle"></Card>
-        <Card className='card' pokemonName="pikachu"></Card>
-        <Card className='card' pokemonName="kyogre"></Card>
-        <Card className='card' pokemonName="breloom"></Card>
-        <Card className='card' pokemonName="blaziken"></Card>
+        <Card className='card' pokemonName="groudon" onClick={handleClick}></Card>
+        <Card className='card' pokemonName="suicune" onClick={handleClick}></Card>
+        <Card className='card' pokemonName="bulbasaur" onClick={handleClick}></Card>
+        <Card className='card' pokemonName="charmander" onClick={handleClick}></Card>
+        <Card className='card' pokemonName="squirtle" onClick={handleClick}></Card>
+        <Card className='card' pokemonName="pikachu" onClick={handleClick}></Card>
+        <Card className='card' pokemonName="kyogre" onClick={handleClick}></Card>
+        <Card className='card' pokemonName="breloom" onClick={handleClick}></Card>
+        <Card className='card' pokemonName="blaziken" onClick={handleClick}></Card>
       </div>
     </div>
   )

@@ -41,7 +41,8 @@ export default function Card({pokemonName, className, onClick}) {
             class={className} 
             src = {imageSource} 
             alt={`Image of ${pokemonName}`}
-            onClick={onClick}/>)}
+            onClick={onClick}
+            id = {pokemonName}/>)}
         </div>
     );
 }
