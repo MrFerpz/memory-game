@@ -1,30 +1,25 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-export default function Card({pokemonName}) {
+export default function Card({pokemonName, className, onClick}) {
     const [pokedata, setPokedata] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         let ignore = false;
         let abortController = new AbortController();
-
-        const fetchData = async () => {
         setIsLoading(true);
-        try {
+
+        const fetchData = async function() {
             const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
             const response = await fetch(url);
             const data = await response.json();
-            if (!ignore) { 
-                setPokedata(data) 
+            if (!ignore) {
+                setPokedata(data);
             }
-        } catch (error) {
-            console.error('Error fetching data', error)
-        } finally {
             setIsLoading(false);
-        }};
+        }
 
-        // side-effect
         fetchData();
 
         // clean-up
@@ -42,7 +37,11 @@ export default function Card({pokemonName}) {
             {isLoading ? (
             <p>Loading...</p>
                 ) : (
-            <img src = {imageSource} alt={`Image of ${pokemonName}`}/>)}
+            <img 
+            class={className} 
+            src = {imageSource} 
+            alt={`Image of ${pokemonName}`}
+            onClick={onClick}/>)}
         </div>
     );
 }
