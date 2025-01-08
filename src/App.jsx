@@ -7,7 +7,7 @@ function App() {
   let score = 0;
   let clickedPokemon = [];
 
-  // registers the click now but the rest of the logic is flawed
+  // register click and record who was clicked
   function handleClick(e) {
     const pokemon = e.target.id;
     console.log(pokemon);
