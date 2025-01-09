@@ -6,6 +6,9 @@ import Card from '../components/Card'
 function App() {
   const [score, setScore] = useState(0);
   const [pokemonList, setPokemonList] = useState([]);
+  const [cardOrder, setCardOrder] = useState(['ditto', 'groudon', 'suicune', 'bulbasaur', 
+  'charmander', 'squirtle', 'pikachu', 'kyogre', 
+  'breloom', 'blaziken']);
 
   // register click and record who was clicked
   function handleClick(e) {
@@ -32,33 +35,22 @@ function App() {
   }
 
   function shuffle() {
-    // get a list of the cards
-    let cardNodeList = document.querySelectorAll('.card');
-    let cardArray = Array.from(cardNodeList);
-
+    let shuffledOrder = cardOrder;
     // randomise order
-    let currentIndex = cardArray.length;
+    let currentIndex = shuffledOrder.length;
     // 10
     while (currentIndex > 0) {
       // randomindex is a random number between 0 and 9 (as we use floor)
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
-      // e.g. cardArray[9] and cardArray[3] are now cardArray[3] and cardArray[9]
-      [cardArray[currentIndex], cardArray[randomIndex]] 
-      = [cardArray[randomIndex], cardArray[currentIndex]]
+      [shuffledOrder[currentIndex], shuffledOrder[randomIndex]] 
+      = [shuffledOrder[randomIndex], shuffledOrder[currentIndex]]
     }
-    console.log(cardArray);
-    // cardArray should now be a random order
 
-    // assign positions
-    let halfway = Math.floor(cardArray.length / 2)
-    for (let i = 0; i < halfway; i++) {
-      cardArray[i].style.gridArea = `(1 / ${i})`
-    }
-    for (let i = halfway; i < cardArray.length; i++) {
-      cardArray[i].style.gridArea = `(2 / ${i})`
-    }
+     // assign positions
+    setCardOrder(shuffledOrder);
+    console.log(shuffledOrder);
   }
 
   return (
