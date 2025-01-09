@@ -4,14 +4,39 @@ import Header from '../components/Header'
 import Card from '../components/Card'
 
 function App() {
-  let score = 0;
-  let clickedPokemon = [];
+  const [score, setScore] = useState(0);
+  const [pokemonList, setPokemonList] = useState([]);
 
   // register click and record who was clicked
   function handleClick(e) {
     const pokemon = e.target.id;
     console.log(pokemon);
-    clickedPokemon.push(pokemon);
+
+    // check for loss & reset
+    if (pokemonList.includes(pokemon)) {
+      alert("You lose! Try again.");
+      setScore(0);
+      setPokemonList([]);
+    } else {
+    // otherwise add to the score and track clicked mons
+    let newScore = score + 1;
+    let newPokemonList = pokemonList.concat(pokemon);
+    console.log(newPokemonList);
+
+    setScore(newScore);
+    setPokemonList(newPokemonList);
+
+    // now re-arrange
+    shuffle();
+    }
+  }
+
+  function shuffle() {
+    // get a list of the cards
+    let cardNodeList = document.querySelectorAll('.card');
+    let cardArray = Array.from(cardNodeList);
+
+    // assign positions
   }
 
   return (
