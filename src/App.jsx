@@ -36,7 +36,29 @@ function App() {
     let cardNodeList = document.querySelectorAll('.card');
     let cardArray = Array.from(cardNodeList);
 
+    // randomise order
+    let currentIndex = cardArray.length;
+    // 10
+    while (currentIndex > 0) {
+      // randomindex is a random number between 0 and 9 (as we use floor)
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // e.g. cardArray[9] and cardArray[3] are now cardArray[3] and cardArray[9]
+      [cardArray[currentIndex], cardArray[randomIndex]] 
+      = [cardArray[randomIndex], cardArray[currentIndex]]
+    }
+    console.log(cardArray);
+    // cardArray should now be a random order
+
     // assign positions
+    let halfway = Math.floor(cardArray.length / 2)
+    for (let i = 0; i < halfway; i++) {
+      cardArray[i].style.gridArea = `(1 / ${i})`
+    }
+    for (let i = halfway; i < cardArray.length; i++) {
+      cardArray[i].style.gridArea = `(2 / ${i})`
+    }
   }
 
   return (
