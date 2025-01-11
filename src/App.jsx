@@ -12,6 +12,12 @@ function App() {
 
   // register click and record who was clicked
   function handleClick(e) {
+    if (score === 10) {
+      alert("Good job, you win!");
+      score = 0;
+      shuffle();
+    }
+
     const pokemon = e.target.id;
     console.log(pokemon);
 
@@ -20,6 +26,7 @@ function App() {
       alert("You lose! Try again.");
       setScore(0);
       setPokemonList([]);
+      shuffle();
     } else {
     // otherwise add to the score and track clicked mons
     let newScore = score + 1;
@@ -38,9 +45,8 @@ function App() {
     let shuffledOrder = cardOrder;
     // randomise order
     let currentIndex = shuffledOrder.length;
-    // 10
     while (currentIndex > 0) {
-      // randomindex is a random number between 0 and 9 (as we use floor)
+      // randomIndex is a random number between 0 and 9 (as we use floor)
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
@@ -58,16 +64,9 @@ function App() {
       <Header score={score}/>
       <div class="gap"></div>
       <div class="main-grid">
-        <Card className='card' pokemonName="ditto" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="groudon" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="suicune" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="bulbasaur" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="charmander" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="squirtle" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="pikachu" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="kyogre" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="breloom" onClick={handleClick}></Card>
-        <Card className='card' pokemonName="blaziken" onClick={handleClick}></Card>
+        {cardOrder.map(card => (
+          <Card className='card' pokemonName={card} onClick={handleClick}></Card>
+        ))}
       </div>
     </div>
   )
